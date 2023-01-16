@@ -1,0 +1,49 @@
+<form class="example-container" [formGroup]="form" (submit)="operate()">
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idSign">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field>
+        <input matInput placeholder="Paciente" [matAutocomplete]="autoPatient" formControlName="patient">
+        <mat-autocomplete #autoPatient="matAutocomplete" [displayWith]="showPatient">
+            <mat-option *ngFor="let p of patientsFiltered$ | async" [value]="p">
+                {{p.firstName}} {{p.lastName}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>   
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Fecha" readonly formControlName="signDate">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Temperatura" maxlength="5" required formControlName="temperature">
+        <small *ngIf="f['temperature'].errors?.['required'] && f['temperature'].touched" class="invalid">Campo Requerido</small>
+        <small *ngIf="f['temperature'].errors?.['maxlength'] && f['temperature'].touched" class="invalid">Máximo 5 caracteres</small>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Pulso" maxlength="3" required formControlName="pulse">
+        <small *ngIf="f['pulse'].errors?.['required'] && f['pulse'].touched" class="invalid">Campo Requerido</small>
+        <small *ngIf="f['pulse'].errors?.['maxlength'] && f['pulse'].touched" class="invalid">Máximo 3 caracteres</small>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Ritmo Cardiaco" maxlength="3" required formControlName="heartRate">
+        <small *ngIf="f['heartRate'].errors?.['required'] && f['heartRate'].touched" class="invalid">Campo Requerido</small>
+        <small *ngIf="f['heartRate'].errors?.['maxlength'] && f['heartRate'].touched" class="invalid">Máximo 3 caracteres</small>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">
+        <mat-icon>done</mat-icon>
+        <span>Aceptar</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/sign">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancelar</span>
+    </button>
+</form>

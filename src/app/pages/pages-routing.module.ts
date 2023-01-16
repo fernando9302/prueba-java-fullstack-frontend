@@ -15,6 +15,9 @@ import { ReportComponent } from './report/report.component';
 import { SearchComponent } from './search/search.component';
 import { SpecialtyEditComponent } from './specialty/specialty-edit/specialty-edit.component';
 import { SpecialtyComponent } from './specialty/specialty.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { SignComponent } from './sign/sign.component';
+import { SignEditComponent } from './sign/sign-edit/sign-edit.component';
 
 export const routes: Routes = [
     {
@@ -89,6 +92,22 @@ export const routes: Routes = [
         data: { breadcrumb: 'Report' },
         canActivate: [ GuardService ]
       },  
+      {
+        path: 'perfil',
+        component: PerfilComponent,
+        data: { breadcrumb: 'Perfil' },
+        canActivate: [ GuardService ]
+      }, 
+      {
+        path: 'sign',
+        component: SignComponent,
+        data: { breadcrumb: 'Sign' },
+        children: [
+          { path: 'new', component: SignEditComponent, data: { breadcrumb: 'sign-new' } },
+          { path: 'edit/:id', component: SignEditComponent, data: { breadcrumb: 'sign-edit' } },
+        ],
+        canActivate: [ GuardService ]
+      },
       {
         path: 'not-403',
         component: Not403Component

@@ -1,0 +1,74 @@
+<router-outlet></router-outlet>
+
+<mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
+  
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="idSign">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let row"> {{row.idSign}} </td>
+        </ng-container>
+
+        <!-- patient Column -->
+        <ng-container matColumnDef="patient">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient </th>
+            <td mat-cell *matCellDef="let row"> {{row.patient.firstName + ' ' + row.patient.lastName}} </td>
+        </ng-container>
+
+        <!-- signDate Column -->
+        <ng-container matColumnDef="signDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Sign Date </th>
+            <td mat-cell *matCellDef="let row"> {{row.signDate | date: 'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <!-- temperature Column -->
+        <ng-container matColumnDef="temperature">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Temperature </th>
+            <td mat-cell *matCellDef="let row"> {{row.temperature}} </td>
+        </ng-container>
+
+        <!-- pulse Column -->
+        <ng-container matColumnDef="pulse">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Pulse </th>
+            <td mat-cell *matCellDef="let row"> {{row.pulse}} </td>
+        </ng-container>
+
+        <!-- heartRate Column -->
+        <ng-container matColumnDef="heartRate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Heart Rate </th>
+            <td mat-cell *matCellDef="let row"> {{row.heartRate}} </td>
+        </ng-container>
+
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let row">
+                <button mat-button color="primary" [routerLink]="['edit', row.idSign]">
+                    <mat-icon>mode_edit</mat-icon>
+                </button>
+                <button mat-button color="accent" (click)="delete(row.idSign)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10,20]" aria-label="Select page of signs"
+        (page)="showMore($event)" [length]="totalElements"></mat-paginator>
+
+</div>
+
+<button mat-fab color="accent" style="float: right" routerLink="/pages/sign/new">
+    <mat-icon>add</mat-icon>
+</button>

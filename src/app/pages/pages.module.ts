@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -27,6 +27,9 @@ import { Not403Component } from './not403/not403.component';
 import { Not404Component } from './not404/not404.component';
 import { ForgotComponent } from './login/forgot/forgot.component';
 import { TokenComponent } from './login/forgot/token/token.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { SignComponent } from './sign/sign.component';
+import { SignEditComponent } from './sign/sign-edit/sign-edit.component';
 
 @NgModule({
     imports: [
@@ -61,8 +64,11 @@ import { TokenComponent } from './login/forgot/token/token.component';
         Not403Component,
         Not404Component,
         ForgotComponent,
-        TokenComponent
+        TokenComponent,
+        PerfilComponent,
+        SignComponent,
+        SignEditComponent
     ],
-    providers: [],
+    providers: [DatePipe],
 })
 export class PagesModule { }
